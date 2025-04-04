@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
     private float movementX;
     private float movementY;
 
+    public float jumpForce = 5;
+    private int jumpCount = 0;
+    private bool grounded = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,11 +44,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        Jump();
+    }
+
     void FixedUpdate()
     {
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
 
         rb.AddForce(movement * speed);
+
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -54,6 +65,37 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
             count = count + 1;
             SetCountText();
+        }
+    }
+    
+    void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && (grounded == true))
+        {
+            rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            jumpCount++;
+        }
+        if (Input.GetKeyDown(KeyCode.Space) && (grounded == false) && (jumpCount < 2))
+        {
+            rb.AddForce(new Vector3(0, jumpForce, 0), ForceMode.Impulse);
+            jumpCount++;
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Grounded"))
+        {
+            grounded = true;
+            jumpCount = 0;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Grounded"))
+        {
+            grounded = false;
         }
     }
 }

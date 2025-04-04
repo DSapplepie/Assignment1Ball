@@ -461,7 +461,7 @@ GameObject:
   - component: {fileID: 358083774}
   m_Layer: 0
   m_Name: Walls
-  m_TagString: Untagged
+  m_TagString: Grounded
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1173,7 +1173,7 @@ GameObject:
   - component: {fileID: 1386308620}
   m_Layer: 0
   m_Name: Ground
-  m_TagString: Untagged
+  m_TagString: Grounded
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1384,6 +1384,7 @@ MonoBehaviour:
   speed: 10
   countText: {fileID: 114602953}
   winTextObject: {fileID: 2023370692}
+  jumpForce: 5
 --- !u!114 &1528776040
 MonoBehaviour:
   m_ObjectHideFlags: 0
